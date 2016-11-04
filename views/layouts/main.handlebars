@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Volunteer Here</title>
+
+	<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta name="description" content="Volunteer there matches its users with volunteer opportunities around the nation"/>
+    <meta name="keywords" content="charity volunteer travel"/>
+    <!-- Awesomplete Autocomplete -by Lea Verou -->
+    <link rel="stylesheet" href="/assets/css/awesomplete.css" />
+    <!-- Awesomplete Autocomplete -by Lea Verou -->
+    <script src="/assets/javascript/awesomplete.js"></script>
+	<!--Google fonts-->
+	<link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300,300i|Pacifico" rel="stylesheet">
+	<!--Bootstrap-->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+	<!-- Optional theme -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
+	<!-- Font Awesome link -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css">
+	<!-- Site specific overrides -->
+    <link rel="stylesheet" type="text/css" href="/assets/css/style1.css">
+	<link rel="stylesheet" type="text/css" href="/assets/css/style.css">
+
+
+</head>
+<body>
+
+<p class="sign" align="right">
+    {{#unless logged_in}}
+        <a href="/users/sign-in">Sign In</a>
+        <a href="/users/new">Sign Up</a>
+    {{/unless}}
+
+    {{#if logged_in}}
+        Welcome {{name}}! <br>
+        <a href="/users/sign-out">Sign Out</a>
+    {{/if}}
+</p>
+
+{{{ body }}}
+
+
+    <script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+    <!--Google maps API-->
+    <!--<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCaUyn2RKcE8ngjkzT_MdoiUYyVodn4X3g&libraries=places&callback=initMap"
+            async defer></script>-->
+    <!-- Local javascript operations files -->
+    <script type="text/javascript" src="/assets/javascript/app1.js"></script>
+    <script type="text/javascript" src="/assets/javascript/app.js"></script>
+
+</body>
+</html>

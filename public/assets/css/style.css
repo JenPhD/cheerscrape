@@ -1,0 +1,391 @@
+body {
+	font-family: sans-serif;
+	background:url(../img/orlando.jpg) no-repeat center center fixed;
+}
+header{
+	width:100%;
+	padding:40px 0px;;
+	color:white;
+	text-align:center;
+	height:200px;
+}
+h1{
+	color: white;
+}
+
+.sign > a {
+	color: white;
+}
+
+.sign {
+	color: white;
+}
+
+.typewrite{
+	color:white;
+	text-decoration:none;
+	width:100%;
+	text-align:center;
+	font-size: 64px;
+}
+nav ul{
+	overflow:hidden;
+	padding:20px;
+	text-align:center;
+	margin:0;	
+}
+.sign > a{
+	text-decoration: none;
+	color:white;
+	padding:0px 20px;
+}
+a:hover{
+	text-decoration: none;
+	color:black;
+	background-color:#008080;
+} 
+a:active{
+	color:black;
+	text-decoration: none;
+}
+.flightsearch{
+	color:black;
+	font-size:24px;
+	padding:5px;
+}
+.volsearch{
+	color:black;
+	font-size:24px;
+	padding:5px;
+}
+.hotelsearch{
+	color:black;
+	font-size:24px;
+	padding:5px;
+}
+
+/*nav ul li{
+	display:inline-block;
+	padding: 20px;
+	float:right;
+} */
+#login{
+	float:right;
+}
+.mainContent{
+	background: white;
+	height:400px;
+	width:100%;
+	margin-top:5%;
+}
+#signInContentPage{
+	margin-top: 20%;
+}
+#information{
+	padding:30px 30px;
+	text-align:center;
+}
+#flights{
+	background-color: rgba(0, 128, 128, 0.2);
+	text-align: center;
+}
+.container{
+	background-color: rgba(0, 128, 128, 0.2);
+	text-align: center;
+}
+#searchForm{
+	padding:20px;
+	background-color: rgba(0, 128, 128, 0.3);
+	color:white;
+	margin-top: 5%;
+}
+#saved {
+	color:white;
+	background-color:rgba(0, 128, 128, 0.5);
+
+}
+#itin {
+	color:white;
+	background-color:rgba(0, 128, 128, 0.5);
+}
+ul {
+	list-style: none;
+}
+
+.awesomplete {
+	color: black
+}
+
+#usersOrigin #usersDestination {
+	color:black;
+}
+
+.submit {
+	background-color: #40e657;
+	color: whitesmoke;
+}
+
+.submit:hover {
+	background-color: whitesmoke;
+	color: #40e657;
+}
+
+p.sign{
+	font-size:18px;
+	padding:20px;
+}
+
+@media(max-width:850px){
+	.mainContent{
+		height:400px;
+		margin-top:5%;
+	}
+	.plane{
+	font-size:32px;
+	text align:center;
+	}
+	.heart{
+	font-size:32px;
+	text align:center;
+	}
+	.hotel{
+	font-size:32px;
+	text align:center;
+	}
+}
+@media(max-width:750px){
+	.mainContent{
+		height:600px;
+		margin-top:15%;
+	}
+	.plane{
+	font-size:32px;
+	text align:center;
+	}
+	.heart{
+	font-size:32px;
+	text align:center;
+	}
+	.hotel{
+	font-size:32px;
+	text align:center;
+	}
+}
+@media(max-width:550px){
+	.mainContent{
+		height:600px;
+		margin-top:30%;
+	}
+	.plane{
+	font-size:32px;
+	text align:center;
+	}
+	.heart{
+	font-size:32px;
+	text align:center;
+	}
+	.hotel{
+	font-size:32px;
+	text align:center;
+	}
+}
+
+
+/*#form-container{
+	padding: 50px;
+
+}
+
+.panel-heading{
+	font-size: 28px;
+	font-family:'Open Sans Condensed', sans-serif;
+
+}
+
+#inputBox{
+	float: right;
+	padding-right: 20px;
+}
+
+#inputBox .btn {
+	float: right;
+}
+
+#welcomeName { 
+	font-family: 'Open Sans Condensed', sans-serif;
+	font-size: 28px;
+}
+
+#error{
+	color: red;
+}
+.blackText{
+	font-family: 'Open Sans Condensed', sans-serif;
+	background-color: rgba(255, 255, 255,.8);
+	color: black;
+}
+
+form{
+	padding:10px;
+	color: black;
+	font-family: 'Open Sans Condensed', sans-serif;
+	font-size: 18px;
+}
+
+p{
+	float:right;
+	padding-top: 20px;
+}
+
+/*need to come and fix this*/
+/*a .scroll{
+	text-decoration: none;
+	float: right;
+	font-size: 14px;
+	font-family:'Open Sans Condensed', sans-serif;
+	color: black;
+	background-color: #f0f0f0;
+	border:1px solid #ccc;
+	border-radius: 2px;
+	position: fixed;
+	bottom: 10%;
+	right: 0;
+	min-width: 20px;
+	text-align: center;
+	padding: 0 5px 1px;
+	opacity: 0;
+	animation: buttonFade .5s 1s 1 forwards;
+}
+
+div.c-wrapper{
+    width: 80%;*/ /* for example 
+    margin: auto;
+}
+
+.carousel-inner > .item > img, 
+.carousel-inner > .item > a > img{
+width: 100%; /* use this, or not */
+/*margin: auto;
+}*/
+
+/*#featured-destinations{
+	padding: 20px;
+}
+
+.item{
+	margin: 10px;
+	width: 700px;
+	height: 400px;
+	position: relative;
+	align-content: center;
+}
+
+.city-name{
+	font-size: 60px;
+	text-align: center;
+	font-family: 'Open Sans Condensed', sans-serif;
+	position: absolute;
+	bottom: 5px;
+	left:2px; 
+	padding: 0px 8px;
+}
+ #NYC{
+ 	background: url(https://pixabay.com/static/uploads/photo/2014/05/02/23/46/new-york-city-336475__340.jpg);
+	background-size: cover;
+ }
+#AUSTIN{
+	background: url(https://pixabay.com/static/uploads/photo/2016/03/10/15/10/rodeo-1248602__340.jpg);
+	background-size: cover;
+}
+#WDC{
+	background: url(https://pixabay.com/static/uploads/photo/2015/11/04/14/44/white-house-1022633__340.jpg);
+	background-size: cover;
+}
+#LA{
+	background: url(https://pixabay.com/static/uploads/photo/2013/06/04/17/08/hollywood-116225__340.jpg);
+	background-size: cover;
+}
+#CHICAGO{
+	background: url(https://pixabay.com/static/uploads/photo/2014/04/27/22/44/chicago-333599__340.jpg);
+	background-size: cover;
+}
+
+
+#submit3.btn {
+	margin: 10px;
+}
+ styling volunteer info 
+
+.volOpp {
+	text-align: center;
+}
+
+.trip {
+	background-color: rgba(217, 179, 140, .4);
+	border-radius: 2px;
+	line-height: 1.5;
+	text-shadow: 1.3px 1.3px #140d06;
+}
+
+#volTitle {
+	padding: 10px;
+}
+
+#end {
+	margin: 10px 0px;
+	padding-left: 10px;
+}
+
+#org {
+	margin: 10px 0px;
+	padding-left: 10px;
+}
+
+#location {
+	margin: 10px 0px;
+	padding-left: 10px;
+}
+
+#orgImg {
+	margin: 10px 0px;
+	padding: 10px;
+}
+
+.volImg {
+	margin: 10px 0px;
+	zoom: 70%;	
+	padding: 10px;		
+}
+
+#description {
+	
+	font-size: 15px;
+	line-height: 1.5;
+	margin: 10px 0px;
+	padding: 10px;
+	
+}
+
+#link {
+	margin: 10px 0px;
+}
+
+#link > a {
+	color: #140d06;
+	text-shadow: 0px 0px;
+}
+
+ styling flights 
+
+.whiteText {
+	background-color: rgba(217, 179, 140, .4);
+	border-radius: 2px;
+	color: white;
+	line-height: 1.5;
+	padding: 10px;
+	text-shadow: 1.3px 1.3px #140d06;
+}*/
+
+
+
+

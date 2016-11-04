@@ -1,0 +1,48 @@
+<!-- this is the sign_in.handlebars file inside the users folder of the views folder
+views/users/sign_in.handlebars -->
+<div id="header" class="col-md-12">
+<form id="signInForm" class="create-update-form" align="right" action="/users/login" method="POST">
+
+  <div class="form-group">
+    <label for="em">Email:</label>
+    <input type="text" id="em" name="email" class="input">
+  </div>
+
+  <div class="form-group">
+    <label for="pass">Password:</label>
+    <input type="password" id="pass" name="password" class="input">
+  </div>
+
+  <button type="submit" class="submit">Sign In</button>
+</form>
+</div>
+
+<div id= "signInContentPage" class=mainContent><!--Content that explains what we do -->         
+        <div class="row" id="information">
+            <h1>What do we do?</h1>
+            <h2>We help you relax and give back to the communities you visit</h2>
+            <div class="col-sm-4" id="destination_explained">
+                <a href="/trips/flights" class="flightsearch">
+                    <div class="plane"><i class="fa fa-plane" aria-hidden="true"></i></div>
+                        <p>Pick a flight! </p>
+                </a>
+            </div>
+            <div class="col-sm-4">
+                <div class="volunteer_explained">
+                    <a href="/trips/volunteer" class="volsearch">
+                        <div class="heart"><i class="fa fa-heart" aria-hidden="true"></i></div>
+                            <p>Pick the cause you believe in to give back to the community you're visiting, and we'll make your itinerary.</p>
+                    </a>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="hotels_explained">
+                    <a href="/trips/hotels" class="hotelsearch">
+                        <div class="hotel"><i class="fa fa-bed" aria-hidden="true"></i></div>
+                            <p>Find a great place to stay at a discounted rate!</p>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+    </div>
