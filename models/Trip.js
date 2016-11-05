@@ -5,29 +5,31 @@ var Schema = mongoose.Schema;
 
 // Create article schema
 var TripSchema = new Schema({
-    // title is required
+    // departure city
     depcity: {
         type:String,
         required:true
     },
-    // link is required
+    //destination city
     destcity: {
         type:String,
         required:true
     },
+    //depart date
     departdate: {
         type:Date,
         required:true
     },
+    //return date
     returndate: {
         type:Date,
         required:true
     },
 
-    // this only saves one note's ObjectId. ref refers to the Note model.
-    note: {
+    // this only saves one user's ObjectId. ref refers to the User model.
+    email: {
         type: Schema.Types.ObjectId,
-        ref: 'Note'
+        ref: 'User'
     }
 });
 

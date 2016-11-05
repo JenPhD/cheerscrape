@@ -8,17 +8,20 @@ var UserSchema = new Schema({
     // name is required
     name: {
         type:String,
-        required:true
+        trim: true,
+        required:"Username is required"
     },
     // email is required
     email: {
         type:String,
-        required:true
+        unique:true,
+        required: "Email is required",
+        match: [/.+\@.+\..+/, "Please enter a valid e-mail address"]
     },
     // pwdhash is required
     pwdhash: {
         type:String,
-        required:true
+        required: "Password is required"
     },
     // this only saves one trip's ObjectId. ref refers to the Trip model.
     trip: {
@@ -27,7 +30,7 @@ var UserSchema = new Schema({
     }
 });
 
-// Create the WebVol model with the ArticleSchema
+// Create the User model with the UserSchema
 var User = mongoose.model('User', UserSchema);
 
 // export the model

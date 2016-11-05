@@ -1,23 +1,22 @@
 //Dependencies for express
 var express = require('express');
-var app = express();
+var path = require('path');
 var bodyParser = require('body-parser');
 var logger = require('morgan');
 var mongoose = require('mongoose');
+var favicon = require('serve-favicon');
+var session = require('express-session');
 
 // Dependencies for scraper:
 var request = require('request'); // Snatches html from urls
 var cheerio = require('cheerio'); // Scrapes our html
 
-// use morgan and bodyparser with our app
-app.use(logger('dev'));
-app.use(bodyParser.urlencoded({
-    extended: false
-}));
+//instantiate app
+var app = express();
 
-// make public a static dir
-app.use(express.static('public'));
-
+// Database configuration with mongoose
+//var mongoDBURL = process.env.NODE_ENV === 'production' ? 'heroku:databaseurl' : 'mongodb://localhost/27017/awesamsara';
+//MongoClient.connect(mongoDBURL, function(){});
 // Database configuration with mongoose
 mongoose.connect('mongodb://localhost/awesamsara');
 var db = mongoose.connection;
@@ -38,51 +37,93 @@ var WebVol = require('./models/WebVol.js');
 var Trip = require('./models/Trip.js');
 var User = require('./models/User.js');
 
-// first, tell the console what server2.js is doing
-console.log("\n******************************************\n" +
-    "Grabbing every web developer opportunity\n" +
-    "from the Volunteer Match website:" +
-    "\n******************************************\n")
+// use morgan and bodyparser with our app
+app.use(logger('dev'));
+app.use(bodyParser.urlencoded({
+    extended: false
+}));
 
-// Now, make a request call for the "web developer" search on Volunteer Match.
-request('http://www.volunteermatch.org/search/virtual?k=web+developer&searchOpps=&v=true&s=1&o=recency&l=Apopka%2C+FL%2C+USA&r=virtual&sk=&specialGroupsData.groupSize=&na=&partner=&usafc=#k=web+developer&v=true&s=1&o=recency&l=Apopka%2C+FL%2C+USA&r=virtual&sk=&specialGroupsData.groupSize=&na=&partner=&usafc=',
-    function (error, response, html) {
+//allow sessions and use cookie parser
+var cookieParser = require('cookie-parser');
+app.use(session({ secret: 'app', cookie: { maxAge: 60000 }, resave: true, saveUninitialized: true}));
+app.use(cookieParser());
 
-    // Load the html into cheerio and save it to a var.
-    // '$' becomes a shorthand for cheerio's selector commands,
-    //  much like jQuery's '$'.
-    var $ = cheerio.load(html);
+// make public a static dir
+app.use(express.static('public'));
+//Configure public web folder
+app.use('/assets', express.static(path.join(__dirname, 'public', 'assets')));
 
-    // an empty array to save the data that we'll scrape
-    var result = [];
+// view engine setup
+app.set('views', path.join(__dirname, 'views'));
+//set up handlebars
+var exphbs = require('express-handlebars');
+app.engine('handlebars', exphbs({
+    defaultLayout: 'main'
+}));
+app.set('view engine', 'handlebars');
 
-    // With cheerio, find each title of the volunteer opportunity
-        //Not the read_more link which shares the psr_link class
-    // (i: iterator. element: the current element)
-    $('a.psr_link:not(.read_more)').each(function(i, element) {
+// uncomment after placing your favicon in /public
+//app.use(favicon(__dirname + '/public/favicon.ico'));
 
-        // save the text of the element (this) in a "title" variable
-        var title = $(this).text();
+//Configure body-parser middleware
+var bodyParser = require('body-parser');
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
 
-        // In the currently selected element,
-        // look at the href attribute value for the link
-        // then save the values for any "href" attributes
-        //concatenate with main weblink
-        var link = 'www.volunteermatch.org' + $(this).attr('href');
+//Set up console logger
+var logger = require('morgan');
+app.use(logger('dev'));
 
-        // save these results in an object that we'll push
-        // into the result array we defined earlier
-        result.push({
-            title: title,
-            link: link
+//Configure app routes
+//override with POST having ?_method=DELETE
+var methodOverride = require('method-override'); //for deletes in express
+app.use(methodOverride('_method'));
+
+// Our model controllers
+var application_controller = require('./controllers/application_controller');
+var trips_controller = require('./controllers/trips_controller.js');
+var users_controller = require('./controllers/users_controller.js');
+var notes_controller = require('./controllers/notes_controller.js');
+app.use('/', application_controller);
+app.use('/trips', trips_controller);
+app.use('/users', users_controller);
+app.use('/notes', notes_controller);
+
+// catch 404 and forward to error handler
+app.use(function(req, res, next) {
+    var err = new Error('Not Found');
+    err.status = 404;
+    next(err);
+});
+
+// Error handler -- development error handler will print stacktrace
+if (app.get('env') === 'development') {
+    app.use(function(err, req, res) {
+        res.status(err.status || 500);
+        res.render('error', {
+            message: err.message,
+            error: err
         });
     });
+}
 
-    // log the result once cheerio analyzes each of its selected elements
-    console.log(result);
+//Error handler -- production handler not leaking stacktrace to user
+app.use(function(err, req, res) {
+    res.status(err.status || 500);
+    res.render('error', {
+        message: err.message,
+        error: {}
+    });
 });
+
+// our module gets exported as app.
+module.exports = app;
+
+//listener in bin/www
+
+
 
 // listen on port 3000
-app.listen(3000, function() {
-    console.log('App running on port 3000!');
-});
+// app.listen(3000, function() {
+//     console.log('App running on port 3000!');
+// });

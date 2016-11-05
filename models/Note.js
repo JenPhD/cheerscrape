@@ -12,7 +12,8 @@ var NoteSchema = new Schema({
     },
     // just a string
     title: {
-        type:String
+        type:String,
+        required: "Title of note required"
     },
     // just a string
     body: {
@@ -20,6 +21,10 @@ var NoteSchema = new Schema({
     },
     gitrepo: {
         type:String
+    },
+    noteDate: {
+        type:Date,
+        default: Date.now
     }
 });
 
