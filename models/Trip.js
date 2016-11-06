@@ -33,7 +33,7 @@ var TripSchema = new Schema({
     }
 });
 
-// Create the WebVol model with the ArticleSchema
+// Create the Trip model with the TripSchema
 var Trip = mongoose.model('Trip', TripSchema);
 
 // export the model

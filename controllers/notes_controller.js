@@ -1,4 +1,5 @@
-var models = require('../models');
+var WebVol = require('../models/WebVol');
+var mongoose = require('mongoose');
 var express = require('express');
 var router  = express.Router();
 
@@ -57,7 +58,7 @@ router.get('/scrape', function(req,res) {
 // this will get the webvols we scraped from the mongoDB
 router.get('/voldev', function(req, res){
     // grab every doc in the Articles array
-    VolDev.find({}, function(err, doc){
+    WebVol.find({}, function(err, doc){
         // log any errors
         if (err){
             console.log(err);
@@ -106,7 +107,7 @@ router.post('/voldev/:id', function(req, res){
             // using the WebVol id passed in the id parameter of our url,
             // prepare a query that finds the matching WebVol in our db
             // and update it to make it's lone note the one we just saved
-            Article.findOneAndUpdate({'_id': req.params.id}, {'note':doc._id})
+            WebVol.findOneAndUpdate({'_id': req.params.id}, {'note':doc._id})
             // execute the above query
                 .exec(function(err, doc){
                     // log any errors
@@ -121,4 +122,6 @@ router.post('/voldev/:id', function(req, res){
     });
 });
 
+
+// export the router
 module.exports = router;

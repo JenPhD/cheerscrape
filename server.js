@@ -17,14 +17,17 @@ var app = express();
 // Database configuration with mongoose
 //var mongoDBURL = process.env.NODE_ENV === 'production' ? 'heroku:databaseurl' : 'mongodb://localhost/27017/awesamsara';
 //MongoClient.connect(mongoDBURL, function(){});
+
 // Database configuration with mongoose
-mongoose.connect('mongodb://localhost/awesamsara');
+mongoose.connect('mongodb://localhost/27107/awesamsara');
 var db = mongoose.connection;
 
 // show any mongoose errors
 db.on('error', function(err) {
     console.log('Mongoose Error: ', err);
 });
+
+
 
 // once logged in to the db through mongoose, log a success message
 db.once('open', function() {

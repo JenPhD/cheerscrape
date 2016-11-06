@@ -19,7 +19,7 @@
     "mongodb"
   ],
   "author": "Jen",
-  "license": "ISC",
+  "l.icense": "ISC",
   "bugs": {
     "url": "https://github.com/JenPhD/cheerscrape/issues"
   },
@@ -27,6 +27,7 @@
   "dependencies": {
     "bcryptjs": "^2.3.0",
     "body-parser": "^1.15.2",
+    "bootstrap": "^3.3.7",
     "cheerio": "^0.22.0",
     "cookie-parser": "^1.4.3",
     "debug": "^2.2.0",

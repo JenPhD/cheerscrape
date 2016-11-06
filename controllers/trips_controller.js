@@ -1,6 +1,11 @@
-var models = require('../models');
+var Trip = require('../models/Trip');
 var express = require('express');
+var mongoose = require('mongoose');
 var router = express.Router();
+
+// Database configuration with mongoose
+mongoose.connect('mongodb://localhost/27107/awesamsara');
+var db = mongoose.connection;
 
 //this is the trips_controller.js file
 // =================================================================
@@ -28,7 +33,7 @@ router.get('/hotels', function(req,res) {
 //Where the id is the user id of the logged in user
 //This will show the trip search terms for the trip.
 router.get('/', function (req, res) {
-    db.Trip.find(
+    Trip.find(
         {'_id': req.params.id}
         //then...
     ).then(function(trips) {
@@ -55,7 +60,7 @@ router.get('/', function (req, res) {
 //Use the Trip model to create and a trip based on what's
 //passed in req.body (depcity, destcity, departdate, returndate, numvol)
 router.post('/create', function (req, res) {
-    db.Trip.insert({
+    var newTrip = new Trip({
         depcity: req.body.usersOrigin,
         destcity: req.body.usersDestination,
         departdate: req.body.departingDate,
@@ -63,9 +68,8 @@ router.post('/create', function (req, res) {
         numvol: req.body.volunteers,
         intinerary: req.body.itinerary,
         '_id': req.params._id
-    })
-    // connect the .create to this .then
-        .then(function() {
+    });
+        newTrip.save(function(err) {
             res.redirect('/');
         })
 });
@@ -73,7 +77,7 @@ router.post('/create', function (req, res) {
 // Use the Trip model to update itinerary to move to itinerary column
 // using the id of the trip (as passed in the url)
 router.put('/update/:id', function (req, res) {
-    db.Trip.update(
+    Trip.update(
         { '_id' : req.params.id },
         { $set: {itinerary: req.body.itinerary}}
     )
@@ -86,7 +90,7 @@ router.put('/update/:id', function (req, res) {
 //Use the Trip model to delete a trip
 //based on the id passed in the url
 router.delete('/delete/:id', function(req,res) {
-    db.Trip.remove(
+    Trip.remove(
         { '_id': req.params.id }
     )
     // connect it to this .then.

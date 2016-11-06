@@ -1,8 +1,10 @@
 //require bcrypt for authentication/hashing and salting of passwords
 var bcrypt = require('bcryptjs');
-var models = require('../models');
+var User = require('../models/User');
+var mongoose = require('mongoose');
 var express = require('express');
 var router  = express.Router();
+console.log('User::', User);
 
 //this is the users_controller.js file
 //Get, renders sign up for new users
@@ -26,40 +28,40 @@ router.get('/sign-out', function(req,res) {
 // login for users with account, matches with email and redirects to
 //sign-in
 router.post('/login', function(req, res) {
-    db.User.find(
-        { email: req.body.email }
-    ).then(function(user) {
-
-        if (user == null){
+    User.find({
+        email: req.body.email
+    }).then(function (user) {
+        if (user == null) {
             res.redirect('/users/sign-in')
+        } else {
+            // Use bcrypt to compare the user's password input
+            bcrypt.compare(req.body.password, user.pwdhash, function (err, result) {
+                // if the result is true (and thus pass and hash match)
+                if (result == true) {
+                    // save the user's information to req.session
+                    //enter the user's session by setting properties to req.
+                    //save the logged-in status to the session
+                    req.session.logged_in = true;
+                    // the username to the session
+                    req.session.name = user.name;
+                    // and the user's email.
+                    req.session.email = user.email;
+                    //redirect to index
+                    res.redirect('/');
+                }
+                // if the result is anything but true (password invalid)
+                else {
+                    // redirect user to sign in
+                    res.redirect('/users/sign-in')
+                }
+            })
         }
-        // Use bcrypt to compare the user's password input
-        bcrypt.compare(req.body.password, user.pwdhash, function(err, result) {
-            // if the result is true (and thus pass and hash match)
-            if (result == true){
-                // save the user's information to req.session
-                //enter the user's session by setting properties to req.
-                //save the logged-in status to the session
-                req.session.logged_in = true;
-                // the username to the session
-                req.session.name = user.name;
-                // and the user's email.
-                req.session.email = user.email;
-                //redirect to index
-                res.redirect('/');
-            }
-            // if the result is anything but true (password invalid)
-            else{
-                // redirect user to sign in
-                res.redirect('/users/sign-in')
-            }
-        })
-    })
+    });
 });
 
 // register and create a user, matching with email
 router.post('/create', function(req,res) {
-    db.User.find(
+    User.find(
         { email: req.body.email }
     ).then(function(users) {
 
@@ -74,23 +76,19 @@ router.post('/create', function(req,res) {
 
                     // Using the User model, create a new user,
                     // storing the email they sent and the hash you just made
-                    db.User.insert(
-                        {
-                            name: req.body.name,
-                            email: req.body.email,
-                            pwdhash: hash
-                        }
-                    )
-                    // In a .then promise connected to that create method,
-                    // save the user's information to req.session
-                        .then(function(user){
+                    var newUser = new User({
+                        name: req.body.name,
+                        email: req.body.emal,
+                        pwdhash: hash
+                    });
+                    newUser.save(function(err){
                             //enter the user's session by setting properties to req.
                             //save the logged in status to the session
                             req.session.logged_in = true;
                             //the username to the session
-                            req.session.name = user.name;
+                            req.session.name = newUser.name;
                             // and the user's email.
-                            req.session.email = user.email;
+                            req.session.email = newUser.email;
                             // redirect to home on login
                             res.redirect('/')
                         })
